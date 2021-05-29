@@ -10,10 +10,14 @@ refs.searchForm.addEventListener('submit', onSearch)
 refs.loadBtn.addEventListener('click', onLoadMore)
 
 function onSearch(e) {
-    e.preventDefault()
+    e.preventDefault();
+    
     picApiService.query = e.currentTarget.elements.query.value;
     picApiService.resetPage();
-    picApiService.fetchPic().then(renderPicMarkup);
+    picApiService.fetchPic().then(hits => {
+        clearGallery();
+        renderPicMarkup(hits);
+    });
 }
 
 function onLoadMore() {
@@ -22,4 +26,8 @@ function onLoadMore() {
 
 function renderPicMarkup(hits) {
    refs.gallery.insertAdjacentHTML('beforeend', cardTmpl(hits))
+}
+
+function clearGallery() {
+    refs.gallery.innerHTML = '';
 }
