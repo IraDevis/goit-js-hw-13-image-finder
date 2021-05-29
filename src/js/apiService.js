@@ -10,11 +10,11 @@ export default class PicApiService {
     
     fetchPic() {
         return fetch(`${BASE_URL}&q=${this.searchQuery}&page=${this.page}&per_page=${perPage}&key=${API_KEY}`)
-            .then(res => res.json())
-            .then(data => {
+            .then(response => response.json())
+            .then(({hits}) => {
                 this.page += 1;
-                return data.hits;
-            })
+                return hits;
+            }).catch (console.log)
     }
 
     resetPage() {
