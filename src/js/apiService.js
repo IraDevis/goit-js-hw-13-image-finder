@@ -14,7 +14,7 @@ export default class PicApiService {
             .then(({hits}) => {
                 this.page += 1;
                 return hits;
-            }).catch (console.log)
+            })
     }
 
     resetPage() {

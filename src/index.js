@@ -17,7 +17,7 @@ function onSearch(e) {
     picApiService.fetchPic().then(hits => {
         clearGallery();
         renderPicMarkup(hits);
-    });
+    }).catch(error => console.log(error));
 }
 
 function onLoadMore() {
@@ -25,7 +25,11 @@ function onLoadMore() {
 }
 
 function renderPicMarkup(hits) {
-   refs.gallery.insertAdjacentHTML('beforeend', cardTmpl(hits))
+    refs.gallery.insertAdjacentHTML('beforeend', cardTmpl(hits));
+        refs.gallery.scrollIntoView({
+  behavior: 'smooth',
+  block: 'end',
+});
 }
 
 function clearGallery() {
